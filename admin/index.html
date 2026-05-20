@@ -57,8 +57,8 @@
   <label>キャッチコピー</label>
   <input id="catchCopy" placeholder="例：赤坂で楽しむ本格イタリアン">
 
-  <label>メイン画像URL</label>
-  <input id="heroImage" placeholder="https://...">
+  <label>メイン画像</label>
+<input type="file" id="heroImage" accept="image/*">
 
   <h2>表示設定</h2>
   <div class="grid">
@@ -256,7 +256,18 @@ function createPreview(){
   setText("pAccess", val("access","未入力"));
   setText("pReserveUrl", val("reserveUrl","未入力"));
 
-  setBg("pHero", val("heroImage",""));
+  const heroFile = document.getElementById("heroImage").files[0];
+
+if(heroFile){
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    document.getElementById("pHero").style.backgroundImage =
+      `linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.28)),url(${e.target.result})`;
+  };
+
+  reader.readAsDataURL(heroFile);
+}
   setBg("pConceptImage", val("conceptImage",""));
   setBg("pMenuImage", val("menuImage",""));
   setBg("pSpaceImage", val("spaceImage",""));
