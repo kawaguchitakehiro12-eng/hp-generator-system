@@ -1,97 +1,261 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HP発電機システム</title>
+
   <style>
-    body{font-family:sans-serif;background:#f5f5f5;padding:40px;}
-    .container{max-width:1100px;margin:auto;background:white;padding:30px;border-radius:20px;box-shadow:0 5px 20px rgba(0,0,0,.08);}
-    button{background:#111;color:white;border:none;padding:15px 20px;border-radius:10px;cursor:pointer;font-size:16px;}
-    input,select{width:100%;padding:12px;margin:10px 0 20px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;}
-    .form{display:none;margin-top:30px;}
-    .preview{display:none;margin-top:40px;border:1px solid #ddd;border-radius:20px;overflow:hidden;}
-    .hero{background:#111;color:white;padding:70px 30px;text-align:center;}
-    .hero h2{font-size:42px;margin:0 0 15px;}
-    .hero p{font-size:20px;margin:0;}
-    .section{padding:35px;}
-    .card{background:#fafafa;padding:20px;border-radius:15px;margin-top:15px;}
+    body{font-family:"Noto Serif JP",serif;background:#f4f1ec;margin:0;color:#222;}
+    .admin{max-width:1100px;margin:40px auto;background:#fff;padding:32px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08);}
+    h1{font-size:32px;margin-bottom:8px;}
+    h2{margin-top:36px;border-left:5px solid #8b6f3e;padding-left:12px;}
+    label{font-weight:bold;margin-top:18px;display:block;}
+    input,textarea,select{width:100%;padding:12px;margin-top:8px;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;font-size:15px;}
+    textarea{min-height:90px;}
+    button{background:#111;color:white;border:none;padding:14px 22px;border-radius:8px;margin-top:24px;cursor:pointer;font-size:16px;}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+    .preview{display:none;margin-top:50px;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #ddd;}
+    .hero{height:520px;background:#111;color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;background-size:cover;background-position:center;}
+    .hero h2{font-size:54px;border:none;padding:0;margin:0 0 16px;letter-spacing:.08em;}
+    .hero p{font-size:20px;}
+    .nav{background:#111;color:white;padding:18px;text-align:center;letter-spacing:.12em;}
+    .section{padding:70px 55px;border-bottom:1px solid #eee;}
+    .section h3{font-size:32px;margin-bottom:18px;color:#8b6f3e;letter-spacing:.08em;}
+    .section p{line-height:1.9;}
+    .image{width:100%;height:320px;background:#ddd;border-radius:14px;background-size:cover;background-position:center;margin-top:24px;}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;}
+    .card{background:#fafafa;padding:22px;border-radius:12px;}
+    .info-table p{border-bottom:1px solid #eee;padding:12px 0;margin:0;}
+    @media(max-width:800px){.grid,.cards{grid-template-columns:1fr}.hero h2{font-size:36px}.section{padding:45px 24px}}
   </style>
 </head>
+
 <body>
 
-<div class="container">
+<div class="admin">
   <h1>HP発電機システム</h1>
+  <p>店舗情報を入力すると、飲食店向けHPプレビューを自動生成します。</p>
 
-  <button onclick="showForm()">新規店舗を作成</button>
-
-  <div class="form" id="form">
-    <h2>店舗情報入力</h2>
-
-    <label>テンプレート</label>
-    <select id="template">
-      <option>居酒屋</option>
-      <option>カフェ</option>
-      <option>バー</option>
-      <option>美容室</option>
-      <option>整体</option>
-    </select>
-
-    <label>店舗名</label>
-    <input id="shopName" type="text" placeholder="例：居酒屋たけ">
-
-    <label>キャッチコピー</label>
-    <input id="catchCopy" type="text" placeholder="例：大人の隠れ家居酒屋">
-
-    <label>住所</label>
-    <input id="address" type="text" placeholder="東京都渋谷区〇〇">
-
-    <label>営業時間</label>
-    <input id="hours" type="text" placeholder="17:00〜24:00">
-
-    <label>メイン画像URL</label>
-    <input id="imageUrl" type="text" placeholder="https://...">
-
-    <button onclick="createPreview()">HPを作成する</button>
+  <h2>基本情報</h2>
+  <div class="grid">
+    <div>
+      <label>テンプレート</label>
+      <select id="template">
+        <option>イタリアン</option>
+        <option>居酒屋</option>
+        <option>カフェ</option>
+        <option>バー</option>
+        <option>和食</option>
+      </select>
+    </div>
+    <div>
+      <label>店舗名</label>
+      <input id="shopName" placeholder="例：IL CARDINALE AKASAKA">
+    </div>
   </div>
 
+  <label>キャッチコピー</label>
+  <input id="catchCopy" placeholder="例：赤坂で楽しむ本格イタリアン">
+
+  <label>メイン画像URL</label>
+  <input id="heroImage" placeholder="https://...">
+
+  <h2>コンセプト</h2>
+  <label>コンセプト見出し</label>
+  <input id="conceptTitle" placeholder="例：本場イタリアの空気を感じるレストラン">
+
+  <label>コンセプト本文</label>
+  <textarea id="conceptText" placeholder="お店のこだわりや世界観を入力"></textarea>
+
+  <label>コンセプト画像URL</label>
+  <input id="conceptImage" placeholder="https://...">
+
+  <h2>コース</h2>
+  <label>COURSE見出し</label>
+  <input id="courseTitle" placeholder="例：COURSE">
+
+  <label>COURSE本文</label>
+  <textarea id="courseText" placeholder="コース内容や利用シーンを入力"></textarea>
+
+  <h2>メニュー</h2>
+  <div class="grid">
+    <div>
+      <label>MENU見出し</label>
+      <input id="menuTitle" placeholder="例：MENU">
+    </div>
+    <div>
+      <label>MENU画像URL</label>
+      <input id="menuImage" placeholder="https://...">
+    </div>
+  </div>
+
+  <label>MENU本文</label>
+  <textarea id="menuText" placeholder="料理の特徴やおすすめメニュー"></textarea>
+
+  <h2>ランチ・カフェ</h2>
+  <label>LUNCH & CAFE本文</label>
+  <textarea id="lunchText" placeholder="ランチやカフェ利用について"></textarea>
+
+  <h2>ドリンク</h2>
+  <label>DRINK本文</label>
+  <textarea id="drinkText" placeholder="ワイン、カクテル、ソフトドリンクなど"></textarea>
+
+  <h2>空間・席</h2>
+  <div class="grid">
+    <div>
+      <label>SPACE本文</label>
+      <textarea id="spaceText" placeholder="店内空間、席、個室、貸切など"></textarea>
+    </div>
+    <div>
+      <label>SPACE画像URL</label>
+      <input id="spaceImage" placeholder="https://...">
+    </div>
+  </div>
+
+  <h2>ニュース</h2>
+  <label>NEWS本文</label>
+  <textarea id="newsText" placeholder="キャンペーン、営業時間変更、新メニューなど"></textarea>
+
+  <h2>店舗情報</h2>
+  <div class="grid">
+    <div>
+      <label>住所</label>
+      <input id="address" placeholder="東京都港区赤坂〇〇">
+    </div>
+    <div>
+      <label>電話番号</label>
+      <input id="tel" placeholder="03-0000-0000">
+    </div>
+    <div>
+      <label>営業時間</label>
+      <input id="hours" placeholder="11:00〜23:00">
+    </div>
+    <div>
+      <label>定休日</label>
+      <input id="holiday" placeholder="年中無休">
+    </div>
+    <div>
+      <label>アクセス</label>
+      <input id="access" placeholder="赤坂駅 徒歩1分">
+    </div>
+    <div>
+      <label>予約URL</label>
+      <input id="reserveUrl" placeholder="https://...">
+    </div>
+  </div>
+
+  <button onclick="createPreview()">HPを作成する</button>
+
   <div class="preview" id="preview">
-    <div class="hero" id="previewHero">
-      <h2 id="previewName"></h2>
-      <p id="previewCatch"></p>
+    <div class="nav">TOP / CONCEPT / COURSE / MENU / LUNCH & CAFE / DRINK / SPACE / ACCESS</div>
+
+    <div class="hero" id="pHero">
+      <div>
+        <h2 id="pShopName">店舗名</h2>
+        <p id="pCatchCopy">キャッチコピー</p>
+      </div>
     </div>
 
     <div class="section">
-      <h3>店舗情報</h3>
-      <div class="card">
-        <p><strong>住所：</strong><span id="previewAddress"></span></p>
-        <p><strong>営業時間：</strong><span id="previewHours"></span></p>
+      <h3>CONCEPT</h3>
+      <h4 id="pConceptTitle"></h4>
+      <p id="pConceptText"></p>
+      <div class="image" id="pConceptImage"></div>
+    </div>
+
+    <div class="section">
+      <h3>COURSE</h3>
+      <h4 id="pCourseTitle"></h4>
+      <p id="pCourseText"></p>
+    </div>
+
+    <div class="section">
+      <h3>MENU</h3>
+      <p id="pMenuText"></p>
+      <div class="image" id="pMenuImage"></div>
+    </div>
+
+    <div class="section">
+      <h3>LUNCH & CAFE</h3>
+      <p id="pLunchText"></p>
+    </div>
+
+    <div class="section">
+      <h3>DRINK</h3>
+      <p id="pDrinkText"></p>
+    </div>
+
+    <div class="section">
+      <h3>SPACE</h3>
+      <p id="pSpaceText"></p>
+      <div class="image" id="pSpaceImage"></div>
+    </div>
+
+    <div class="section">
+      <h3>NEWS</h3>
+      <p id="pNewsText"></p>
+    </div>
+
+    <div class="section">
+      <h3>INFORMATION</h3>
+      <div class="info-table">
+        <p><strong>住所：</strong><span id="pAddress"></span></p>
+        <p><strong>電話番号：</strong><span id="pTel"></span></p>
+        <p><strong>営業時間：</strong><span id="pHours"></span></p>
+        <p><strong>定休日：</strong><span id="pHoliday"></span></p>
+        <p><strong>アクセス：</strong><span id="pAccess"></span></p>
+        <p><strong>予約URL：</strong><span id="pReserveUrl"></span></p>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-function showForm(){
-  document.getElementById("form").style.display = "block";
+function val(id, fallback){
+  return document.getElementById(id).value || fallback;
+}
+
+function setText(id, text){
+  document.getElementById(id).textContent = text;
+}
+
+function setBg(id, url){
+  const el = document.getElementById(id);
+  if(url){
+    el.style.backgroundImage = `linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)),url(${url})`;
+  }else{
+    el.style.backgroundImage = "none";
+  }
 }
 
 function createPreview(){
-  const name = document.getElementById("shopName").value;
-  const catchCopy = document.getElementById("catchCopy").value;
-  const address = document.getElementById("address").value;
-  const hours = document.getElementById("hours").value;
-  const imageUrl = document.getElementById("imageUrl").value;
+  setText("pShopName", val("shopName","店舗名"));
+  setText("pCatchCopy", val("catchCopy","キャッチコピー"));
 
-  document.getElementById("previewName").textContent = name || "店舗名";
-  document.getElementById("previewCatch").textContent = catchCopy || "キャッチコピー";
-  document.getElementById("previewAddress").textContent = address || "住所未入力";
-  document.getElementById("previewHours").textContent = hours || "営業時間未入力";
+  setText("pConceptTitle", val("conceptTitle","コンセプト見出し"));
+  setText("pConceptText", val("conceptText","コンセプト本文が入ります。"));
 
-  if(imageUrl){
-    document.getElementById("previewHero").style.background =
-      `linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url(${imageUrl}) center/cover`;
-  }
+  setText("pCourseTitle", val("courseTitle","COURSE"));
+  setText("pCourseText", val("courseText","コース説明が入ります。"));
+
+  setText("pMenuText", val("menuText","メニュー説明が入ります。"));
+  setText("pLunchText", val("lunchText","ランチ・カフェ説明が入ります。"));
+  setText("pDrinkText", val("drinkText","ドリンク説明が入ります。"));
+  setText("pSpaceText", val("spaceText","空間・席の説明が入ります。"));
+  setText("pNewsText", val("newsText","ニュース情報が入ります。"));
+
+  setText("pAddress", val("address","未入力"));
+  setText("pTel", val("tel","未入力"));
+  setText("pHours", val("hours","未入力"));
+  setText("pHoliday", val("holiday","未入力"));
+  setText("pAccess", val("access","未入力"));
+  setText("pReserveUrl", val("reserveUrl","未入力"));
+
+  setBg("pHero", val("heroImage",""));
+  setBg("pConceptImage", val("conceptImage",""));
+  setBg("pMenuImage", val("menuImage",""));
+  setBg("pSpaceImage", val("spaceImage",""));
 
   document.getElementById("preview").style.display = "block";
 }
