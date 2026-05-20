@@ -16,6 +16,7 @@
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
     .toggle{display:flex;align-items:center;gap:10px;background:#f8f8f8;padding:12px;border-radius:10px;margin-top:12px;}
     .toggle input{width:auto;margin:0;}
+    .input-section{display:block;}
     .preview{display:none;margin-top:50px;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #ddd;}
     .hero{height:520px;background:#111;color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;background-size:cover;background-position:center;}
     .hero h2{font-size:54px;border:none;padding:0;margin:0 0 16px;letter-spacing:.08em;}
@@ -61,52 +62,66 @@
 
   <h2>表示設定</h2>
   <div class="grid">
-    <div class="toggle"><input type="checkbox" id="showConcept" checked><span>CONCEPTを表示</span></div>
-    <div class="toggle"><input type="checkbox" id="showCourse" checked><span>COURSEを表示</span></div>
-    <div class="toggle"><input type="checkbox" id="showMenu" checked><span>MENUを表示</span></div>
-    <div class="toggle"><input type="checkbox" id="showLunch" checked><span>LUNCH & CAFEを表示</span></div>
-    <div class="toggle"><input type="checkbox" id="showDrink" checked><span>DRINKを表示</span></div>
-    <div class="toggle"><input type="checkbox" id="showSpace" checked><span>SPACEを表示</span></div>
-    <div class="toggle"><input type="checkbox" id="showNews" checked><span>NEWSを表示</span></div>
+    <label class="toggle"><input type="checkbox" id="showConcept" checked onchange="toggleInputs()">CONCEPTを表示</label>
+    <label class="toggle"><input type="checkbox" id="showCourse" checked onchange="toggleInputs()">COURSEを表示</label>
+    <label class="toggle"><input type="checkbox" id="showMenu" checked onchange="toggleInputs()">MENUを表示</label>
+    <label class="toggle"><input type="checkbox" id="showLunch" checked onchange="toggleInputs()">LUNCH & CAFEを表示</label>
+    <label class="toggle"><input type="checkbox" id="showDrink" checked onchange="toggleInputs()">DRINKを表示</label>
+    <label class="toggle"><input type="checkbox" id="showSpace" checked onchange="toggleInputs()">SPACEを表示</label>
+    <label class="toggle"><input type="checkbox" id="showNews" checked onchange="toggleInputs()">NEWSを表示</label>
   </div>
 
-  <h2>コンセプト</h2>
-  <label>コンセプト見出し</label>
-  <input id="conceptTitle" placeholder="例：本場イタリアの空気を感じるレストラン">
-  <label>コンセプト本文</label>
-  <textarea id="conceptText" placeholder="お店のこだわりや世界観を入力"></textarea>
-  <label>コンセプト画像URL</label>
-  <input id="conceptImage" placeholder="https://...">
+  <div class="input-section" id="inputConcept">
+    <h2>コンセプト</h2>
+    <label>コンセプト見出し</label>
+    <input id="conceptTitle" placeholder="例：本場イタリアの空気を感じるレストラン">
+    <label>コンセプト本文</label>
+    <textarea id="conceptText" placeholder="お店のこだわりや世界観を入力"></textarea>
+    <label>コンセプト画像URL</label>
+    <input id="conceptImage" placeholder="https://...">
+  </div>
 
-  <h2>コース</h2>
-  <label>COURSE見出し</label>
-  <input id="courseTitle" placeholder="例：COURSE">
-  <label>COURSE本文</label>
-  <textarea id="courseText" placeholder="コース内容や利用シーンを入力"></textarea>
+  <div class="input-section" id="inputCourse">
+    <h2>コース</h2>
+    <label>COURSE見出し</label>
+    <input id="courseTitle" placeholder="例：COURSE">
+    <label>COURSE本文</label>
+    <textarea id="courseText" placeholder="コース内容や利用シーンを入力"></textarea>
+  </div>
 
-  <h2>メニュー</h2>
-  <label>MENU本文</label>
-  <textarea id="menuText" placeholder="料理の特徴やおすすめメニュー"></textarea>
-  <label>MENU画像URL</label>
-  <input id="menuImage" placeholder="https://...">
+  <div class="input-section" id="inputMenu">
+    <h2>メニュー</h2>
+    <label>MENU本文</label>
+    <textarea id="menuText" placeholder="料理の特徴やおすすめメニュー"></textarea>
+    <label>MENU画像URL</label>
+    <input id="menuImage" placeholder="https://...">
+  </div>
 
-  <h2>ランチ・カフェ</h2>
-  <label>LUNCH & CAFE本文</label>
-  <textarea id="lunchText" placeholder="ランチやカフェ利用について"></textarea>
+  <div class="input-section" id="inputLunch">
+    <h2>ランチ・カフェ</h2>
+    <label>LUNCH & CAFE本文</label>
+    <textarea id="lunchText" placeholder="ランチやカフェ利用について"></textarea>
+  </div>
 
-  <h2>ドリンク</h2>
-  <label>DRINK本文</label>
-  <textarea id="drinkText" placeholder="ワイン、カクテル、ソフトドリンクなど"></textarea>
+  <div class="input-section" id="inputDrink">
+    <h2>ドリンク</h2>
+    <label>DRINK本文</label>
+    <textarea id="drinkText" placeholder="ワイン、カクテル、ソフトドリンクなど"></textarea>
+  </div>
 
-  <h2>空間・席</h2>
-  <label>SPACE本文</label>
-  <textarea id="spaceText" placeholder="店内空間、席、個室、貸切など"></textarea>
-  <label>SPACE画像URL</label>
-  <input id="spaceImage" placeholder="https://...">
+  <div class="input-section" id="inputSpace">
+    <h2>空間・席</h2>
+    <label>SPACE本文</label>
+    <textarea id="spaceText" placeholder="店内空間、席、個室、貸切など"></textarea>
+    <label>SPACE画像URL</label>
+    <input id="spaceImage" placeholder="https://...">
+  </div>
 
-  <h2>ニュース</h2>
-  <label>NEWS本文</label>
-  <textarea id="newsText" placeholder="キャンペーン、営業時間変更、新メニューなど"></textarea>
+  <div class="input-section" id="inputNews">
+    <h2>ニュース</h2>
+    <label>NEWS本文</label>
+    <textarea id="newsText" placeholder="キャンペーン、営業時間変更、新メニューなど"></textarea>
+  </div>
 
   <h2>店舗情報</h2>
   <div class="grid">
@@ -206,8 +221,18 @@ function setBg(id, url){
   }
 }
 
-function showSection(sectionId, isShow){
-  document.getElementById(sectionId).style.display = isShow ? "block" : "none";
+function showBlock(id, isShow){
+  document.getElementById(id).style.display = isShow ? "block" : "none";
+}
+
+function toggleInputs(){
+  showBlock("inputConcept", checked("showConcept"));
+  showBlock("inputCourse", checked("showCourse"));
+  showBlock("inputMenu", checked("showMenu"));
+  showBlock("inputLunch", checked("showLunch"));
+  showBlock("inputDrink", checked("showDrink"));
+  showBlock("inputSpace", checked("showSpace"));
+  showBlock("inputNews", checked("showNews"));
 }
 
 function createPreview(){
@@ -236,13 +261,13 @@ function createPreview(){
   setBg("pMenuImage", val("menuImage",""));
   setBg("pSpaceImage", val("spaceImage",""));
 
-  showSection("sectionConcept", checked("showConcept"));
-  showSection("sectionCourse", checked("showCourse"));
-  showSection("sectionMenu", checked("showMenu"));
-  showSection("sectionLunch", checked("showLunch"));
-  showSection("sectionDrink", checked("showDrink"));
-  showSection("sectionSpace", checked("showSpace"));
-  showSection("sectionNews", checked("showNews"));
+  showBlock("sectionConcept", checked("showConcept"));
+  showBlock("sectionCourse", checked("showCourse"));
+  showBlock("sectionMenu", checked("showMenu"));
+  showBlock("sectionLunch", checked("showLunch"));
+  showBlock("sectionDrink", checked("showDrink"));
+  showBlock("sectionSpace", checked("showSpace"));
+  showBlock("sectionNews", checked("showNews"));
 
   const navItems = ["TOP"];
   if(checked("showConcept")) navItems.push("CONCEPT");
@@ -257,6 +282,8 @@ function createPreview(){
   document.getElementById("pNav").textContent = navItems.join(" / ");
   document.getElementById("preview").style.display = "block";
 }
+
+toggleInputs();
 </script>
 
 </body>
