@@ -4,11 +4,97 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HP発電機システム</title>
-</head>
-<body>
-  <h1>HP発電機システム 管理画面</h1>
 
-  <button>新規店舗を作成</button>
+  <style>
+    body{
+      font-family: sans-serif;
+      background:#f5f5f5;
+      padding:40px;
+    }
+
+    .container{
+      max-width:800px;
+      margin:auto;
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 5px 20px rgba(0,0,0,.08);
+    }
+
+    h1{
+      margin-bottom:20px;
+    }
+
+    button{
+      background:#111;
+      color:white;
+      border:none;
+      padding:15px 20px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .form{
+      display:none;
+      margin-top:30px;
+    }
+
+    input, select{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      margin-bottom:20px;
+      border:1px solid #ddd;
+      border-radius:10px;
+      box-sizing:border-box;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>HP発電機システム</h1>
+
+  <button onclick="showForm()">
+    新規店舗を作成
+  </button>
+
+  <div class="form" id="form">
+
+    <h2>店舗情報入力</h2>
+
+    <label>テンプレート</label>
+    <select>
+      <option>居酒屋</option>
+      <option>カフェ</option>
+      <option>バー</option>
+      <option>美容室</option>
+      <option>整体</option>
+    </select>
+
+    <label>店舗名</label>
+    <input type="text" placeholder="例：居酒屋たけ">
+
+    <label>キャッチコピー</label>
+    <input type="text" placeholder="例：大人の隠れ家居酒屋">
+
+    <label>住所</label>
+    <input type="text" placeholder="東京都渋谷区◯◯">
+
+    <button>HPを作成する</button>
+
+  </div>
+
+</div>
+
+<script>
+function showForm(){
+  document.getElementById("form").style.display = "block";
+}
+</script>
 
 </body>
 </html>
