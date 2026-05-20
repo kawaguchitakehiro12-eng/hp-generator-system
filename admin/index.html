@@ -4,70 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HP発電機システム</title>
-
   <style>
-    body{
-      font-family: sans-serif;
-      background:#f5f5f5;
-      padding:40px;
-    }
-
-    .container{
-      max-width:800px;
-      margin:auto;
-      background:white;
-      padding:30px;
-      border-radius:20px;
-      box-shadow:0 5px 20px rgba(0,0,0,.08);
-    }
-
-    h1{
-      margin-bottom:20px;
-    }
-
-    button{
-      background:#111;
-      color:white;
-      border:none;
-      padding:15px 20px;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:16px;
-    }
-
-    .form{
-      display:none;
-      margin-top:30px;
-    }
-
-    input, select{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      margin-bottom:20px;
-      border:1px solid #ddd;
-      border-radius:10px;
-      box-sizing:border-box;
-    }
+    body{font-family:sans-serif;background:#f5f5f5;padding:40px;}
+    .container{max-width:1100px;margin:auto;background:white;padding:30px;border-radius:20px;box-shadow:0 5px 20px rgba(0,0,0,.08);}
+    button{background:#111;color:white;border:none;padding:15px 20px;border-radius:10px;cursor:pointer;font-size:16px;}
+    input,select{width:100%;padding:12px;margin:10px 0 20px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;}
+    .form{display:none;margin-top:30px;}
+    .preview{display:none;margin-top:40px;border:1px solid #ddd;border-radius:20px;overflow:hidden;}
+    .hero{background:#111;color:white;padding:70px 30px;text-align:center;}
+    .hero h2{font-size:42px;margin:0 0 15px;}
+    .hero p{font-size:20px;margin:0;}
+    .section{padding:35px;}
+    .card{background:#fafafa;padding:20px;border-radius:15px;margin-top:15px;}
   </style>
 </head>
-
 <body>
 
 <div class="container">
-
   <h1>HP発電機システム</h1>
 
-  <button onclick="showForm()">
-    新規店舗を作成
-  </button>
+  <button onclick="showForm()">新規店舗を作成</button>
 
   <div class="form" id="form">
-
     <h2>店舗情報入力</h2>
 
     <label>テンプレート</label>
-    <select>
+    <select id="template">
       <option>居酒屋</option>
       <option>カフェ</option>
       <option>バー</option>
@@ -76,23 +38,62 @@
     </select>
 
     <label>店舗名</label>
-    <input type="text" placeholder="例：居酒屋たけ">
+    <input id="shopName" type="text" placeholder="例：居酒屋たけ">
 
     <label>キャッチコピー</label>
-    <input type="text" placeholder="例：大人の隠れ家居酒屋">
+    <input id="catchCopy" type="text" placeholder="例：大人の隠れ家居酒屋">
 
     <label>住所</label>
-    <input type="text" placeholder="東京都渋谷区◯◯">
+    <input id="address" type="text" placeholder="東京都渋谷区〇〇">
 
-    <button>HPを作成する</button>
+    <label>営業時間</label>
+    <input id="hours" type="text" placeholder="17:00〜24:00">
 
+    <label>メイン画像URL</label>
+    <input id="imageUrl" type="text" placeholder="https://...">
+
+    <button onclick="createPreview()">HPを作成する</button>
   </div>
 
+  <div class="preview" id="preview">
+    <div class="hero" id="previewHero">
+      <h2 id="previewName"></h2>
+      <p id="previewCatch"></p>
+    </div>
+
+    <div class="section">
+      <h3>店舗情報</h3>
+      <div class="card">
+        <p><strong>住所：</strong><span id="previewAddress"></span></p>
+        <p><strong>営業時間：</strong><span id="previewHours"></span></p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
 function showForm(){
   document.getElementById("form").style.display = "block";
+}
+
+function createPreview(){
+  const name = document.getElementById("shopName").value;
+  const catchCopy = document.getElementById("catchCopy").value;
+  const address = document.getElementById("address").value;
+  const hours = document.getElementById("hours").value;
+  const imageUrl = document.getElementById("imageUrl").value;
+
+  document.getElementById("previewName").textContent = name || "店舗名";
+  document.getElementById("previewCatch").textContent = catchCopy || "キャッチコピー";
+  document.getElementById("previewAddress").textContent = address || "住所未入力";
+  document.getElementById("previewHours").textContent = hours || "営業時間未入力";
+
+  if(imageUrl){
+    document.getElementById("previewHero").style.background =
+      `linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url(${imageUrl}) center/cover`;
+  }
+
+  document.getElementById("preview").style.display = "block";
 }
 </script>
 
