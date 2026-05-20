@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HP発電機システム</title>
-
   <style>
     body{font-family:"Noto Serif JP",serif;background:#f4f1ec;margin:0;color:#222;}
     .admin{max-width:1100px;margin:40px auto;background:#fff;padding:32px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08);}
@@ -15,27 +14,26 @@
     textarea{min-height:90px;}
     button{background:#111;color:white;border:none;padding:14px 22px;border-radius:8px;margin-top:24px;cursor:pointer;font-size:16px;}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+    .toggle{display:flex;align-items:center;gap:10px;background:#f8f8f8;padding:12px;border-radius:10px;margin-top:12px;}
+    .toggle input{width:auto;margin:0;}
     .preview{display:none;margin-top:50px;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #ddd;}
     .hero{height:520px;background:#111;color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;background-size:cover;background-position:center;}
     .hero h2{font-size:54px;border:none;padding:0;margin:0 0 16px;letter-spacing:.08em;}
     .hero p{font-size:20px;}
-    .nav{background:#111;color:white;padding:18px;text-align:center;letter-spacing:.12em;}
+    .nav{background:#111;color:white;padding:18px;text-align:center;letter-spacing:.12em;font-size:14px;}
     .section{padding:70px 55px;border-bottom:1px solid #eee;}
     .section h3{font-size:32px;margin-bottom:18px;color:#8b6f3e;letter-spacing:.08em;}
-    .section p{line-height:1.9;}
+    .section p{line-height:1.9;white-space:pre-wrap;}
     .image{width:100%;height:320px;background:#ddd;border-radius:14px;background-size:cover;background-position:center;margin-top:24px;}
-    .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;}
-    .card{background:#fafafa;padding:22px;border-radius:12px;}
     .info-table p{border-bottom:1px solid #eee;padding:12px 0;margin:0;}
-    @media(max-width:800px){.grid,.cards{grid-template-columns:1fr}.hero h2{font-size:36px}.section{padding:45px 24px}}
+    @media(max-width:800px){.grid{grid-template-columns:1fr}.hero h2{font-size:36px}.section{padding:45px 24px}}
   </style>
 </head>
 
 <body>
-
 <div class="admin">
   <h1>HP発電機システム</h1>
-  <p>店舗情報を入力すると、飲食店向けHPプレビューを自動生成します。</p>
+  <p>表示したい項目だけONにして、飲食店向けHPプレビューを自動生成します。</p>
 
   <h2>基本情報</h2>
   <div class="grid">
@@ -61,37 +59,36 @@
   <label>メイン画像URL</label>
   <input id="heroImage" placeholder="https://...">
 
+  <h2>表示設定</h2>
+  <div class="grid">
+    <div class="toggle"><input type="checkbox" id="showConcept" checked><span>CONCEPTを表示</span></div>
+    <div class="toggle"><input type="checkbox" id="showCourse" checked><span>COURSEを表示</span></div>
+    <div class="toggle"><input type="checkbox" id="showMenu" checked><span>MENUを表示</span></div>
+    <div class="toggle"><input type="checkbox" id="showLunch" checked><span>LUNCH & CAFEを表示</span></div>
+    <div class="toggle"><input type="checkbox" id="showDrink" checked><span>DRINKを表示</span></div>
+    <div class="toggle"><input type="checkbox" id="showSpace" checked><span>SPACEを表示</span></div>
+    <div class="toggle"><input type="checkbox" id="showNews" checked><span>NEWSを表示</span></div>
+  </div>
+
   <h2>コンセプト</h2>
   <label>コンセプト見出し</label>
   <input id="conceptTitle" placeholder="例：本場イタリアの空気を感じるレストラン">
-
   <label>コンセプト本文</label>
   <textarea id="conceptText" placeholder="お店のこだわりや世界観を入力"></textarea>
-
   <label>コンセプト画像URL</label>
   <input id="conceptImage" placeholder="https://...">
 
   <h2>コース</h2>
   <label>COURSE見出し</label>
   <input id="courseTitle" placeholder="例：COURSE">
-
   <label>COURSE本文</label>
   <textarea id="courseText" placeholder="コース内容や利用シーンを入力"></textarea>
 
   <h2>メニュー</h2>
-  <div class="grid">
-    <div>
-      <label>MENU見出し</label>
-      <input id="menuTitle" placeholder="例：MENU">
-    </div>
-    <div>
-      <label>MENU画像URL</label>
-      <input id="menuImage" placeholder="https://...">
-    </div>
-  </div>
-
   <label>MENU本文</label>
   <textarea id="menuText" placeholder="料理の特徴やおすすめメニュー"></textarea>
+  <label>MENU画像URL</label>
+  <input id="menuImage" placeholder="https://...">
 
   <h2>ランチ・カフェ</h2>
   <label>LUNCH & CAFE本文</label>
@@ -102,16 +99,10 @@
   <textarea id="drinkText" placeholder="ワイン、カクテル、ソフトドリンクなど"></textarea>
 
   <h2>空間・席</h2>
-  <div class="grid">
-    <div>
-      <label>SPACE本文</label>
-      <textarea id="spaceText" placeholder="店内空間、席、個室、貸切など"></textarea>
-    </div>
-    <div>
-      <label>SPACE画像URL</label>
-      <input id="spaceImage" placeholder="https://...">
-    </div>
-  </div>
+  <label>SPACE本文</label>
+  <textarea id="spaceText" placeholder="店内空間、席、個室、貸切など"></textarea>
+  <label>SPACE画像URL</label>
+  <input id="spaceImage" placeholder="https://...">
 
   <h2>ニュース</h2>
   <label>NEWS本文</label>
@@ -119,36 +110,18 @@
 
   <h2>店舗情報</h2>
   <div class="grid">
-    <div>
-      <label>住所</label>
-      <input id="address" placeholder="東京都港区赤坂〇〇">
-    </div>
-    <div>
-      <label>電話番号</label>
-      <input id="tel" placeholder="03-0000-0000">
-    </div>
-    <div>
-      <label>営業時間</label>
-      <input id="hours" placeholder="11:00〜23:00">
-    </div>
-    <div>
-      <label>定休日</label>
-      <input id="holiday" placeholder="年中無休">
-    </div>
-    <div>
-      <label>アクセス</label>
-      <input id="access" placeholder="赤坂駅 徒歩1分">
-    </div>
-    <div>
-      <label>予約URL</label>
-      <input id="reserveUrl" placeholder="https://...">
-    </div>
+    <div><label>住所</label><input id="address" placeholder="東京都港区赤坂〇〇"></div>
+    <div><label>電話番号</label><input id="tel" placeholder="03-0000-0000"></div>
+    <div><label>営業時間</label><input id="hours" placeholder="11:00〜23:00"></div>
+    <div><label>定休日</label><input id="holiday" placeholder="年中無休"></div>
+    <div><label>アクセス</label><input id="access" placeholder="赤坂駅 徒歩1分"></div>
+    <div><label>予約URL</label><input id="reserveUrl" placeholder="https://..."></div>
   </div>
 
   <button onclick="createPreview()">HPを作成する</button>
 
   <div class="preview" id="preview">
-    <div class="nav">TOP / CONCEPT / COURSE / MENU / LUNCH & CAFE / DRINK / SPACE / ACCESS</div>
+    <div class="nav" id="pNav"></div>
 
     <div class="hero" id="pHero">
       <div>
@@ -157,42 +130,42 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sectionConcept">
       <h3>CONCEPT</h3>
       <h4 id="pConceptTitle"></h4>
       <p id="pConceptText"></p>
       <div class="image" id="pConceptImage"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sectionCourse">
       <h3>COURSE</h3>
       <h4 id="pCourseTitle"></h4>
       <p id="pCourseText"></p>
     </div>
 
-    <div class="section">
+    <div class="section" id="sectionMenu">
       <h3>MENU</h3>
       <p id="pMenuText"></p>
       <div class="image" id="pMenuImage"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sectionLunch">
       <h3>LUNCH & CAFE</h3>
       <p id="pLunchText"></p>
     </div>
 
-    <div class="section">
+    <div class="section" id="sectionDrink">
       <h3>DRINK</h3>
       <p id="pDrinkText"></p>
     </div>
 
-    <div class="section">
+    <div class="section" id="sectionSpace">
       <h3>SPACE</h3>
       <p id="pSpaceText"></p>
       <div class="image" id="pSpaceImage"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sectionNews">
       <h3>NEWS</h3>
       <p id="pNewsText"></p>
     </div>
@@ -216,6 +189,10 @@ function val(id, fallback){
   return document.getElementById(id).value || fallback;
 }
 
+function checked(id){
+  return document.getElementById(id).checked;
+}
+
 function setText(id, text){
   document.getElementById(id).textContent = text;
 }
@@ -223,10 +200,14 @@ function setText(id, text){
 function setBg(id, url){
   const el = document.getElementById(id);
   if(url){
-    el.style.backgroundImage = `linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)),url(${url})`;
+    el.style.backgroundImage = `linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.28)),url(${url})`;
   }else{
     el.style.backgroundImage = "none";
   }
+}
+
+function showSection(sectionId, isShow){
+  document.getElementById(sectionId).style.display = isShow ? "block" : "none";
 }
 
 function createPreview(){
@@ -235,10 +216,8 @@ function createPreview(){
 
   setText("pConceptTitle", val("conceptTitle","コンセプト見出し"));
   setText("pConceptText", val("conceptText","コンセプト本文が入ります。"));
-
   setText("pCourseTitle", val("courseTitle","COURSE"));
   setText("pCourseText", val("courseText","コース説明が入ります。"));
-
   setText("pMenuText", val("menuText","メニュー説明が入ります。"));
   setText("pLunchText", val("lunchText","ランチ・カフェ説明が入ります。"));
   setText("pDrinkText", val("drinkText","ドリンク説明が入ります。"));
@@ -257,6 +236,25 @@ function createPreview(){
   setBg("pMenuImage", val("menuImage",""));
   setBg("pSpaceImage", val("spaceImage",""));
 
+  showSection("sectionConcept", checked("showConcept"));
+  showSection("sectionCourse", checked("showCourse"));
+  showSection("sectionMenu", checked("showMenu"));
+  showSection("sectionLunch", checked("showLunch"));
+  showSection("sectionDrink", checked("showDrink"));
+  showSection("sectionSpace", checked("showSpace"));
+  showSection("sectionNews", checked("showNews"));
+
+  const navItems = ["TOP"];
+  if(checked("showConcept")) navItems.push("CONCEPT");
+  if(checked("showCourse")) navItems.push("COURSE");
+  if(checked("showMenu")) navItems.push("MENU");
+  if(checked("showLunch")) navItems.push("LUNCH & CAFE");
+  if(checked("showDrink")) navItems.push("DRINK");
+  if(checked("showSpace")) navItems.push("SPACE");
+  if(checked("showNews")) navItems.push("NEWS");
+  navItems.push("ACCESS");
+
+  document.getElementById("pNav").textContent = navItems.join(" / ");
   document.getElementById("preview").style.display = "block";
 }
 </script>
