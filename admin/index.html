@@ -17,6 +17,8 @@
     .toggle{display:flex;align-items:center;gap:10px;background:#f8f8f8;padding:12px;border-radius:10px;margin-top:12px;}
     .toggle input{width:auto;margin:0;}
     .input-section{display:block;}
+    .menu-item{background:#fafafa;border:1px solid #eee;border-radius:14px;padding:20px;margin-top:18px;}
+    .add-btn{background:#8b6f3e;}
     .preview{display:none;margin-top:50px;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #ddd;}
     .hero{height:520px;background:#111;color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;background-size:cover;background-position:center;}
     .hero h2{font-size:54px;border:none;padding:0;margin:0 0 16px;letter-spacing:.08em;}
@@ -26,8 +28,14 @@
     .section h3{font-size:32px;margin-bottom:18px;color:#8b6f3e;letter-spacing:.08em;}
     .section p{line-height:1.9;white-space:pre-wrap;}
     .image{width:100%;height:320px;background:#ddd;border-radius:14px;background-size:cover;background-position:center;margin-top:24px;}
+    .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px;}
+    .menu-card{background:#fafafa;border-radius:14px;overflow:hidden;border:1px solid #eee;}
+    .menu-card-img{height:220px;background:#ddd;background-size:cover;background-position:center;}
+    .menu-card-body{padding:20px;}
+    .menu-card-body h4{font-size:22px;margin:0 0 10px;}
+    .price{font-weight:bold;color:#8b6f3e;font-size:18px;margin-top:12px;}
     .info-table p{border-bottom:1px solid #eee;padding:12px 0;margin:0;}
-    @media(max-width:800px){.grid{grid-template-columns:1fr}.hero h2{font-size:36px}.section{padding:45px 24px}}
+    @media(max-width:800px){.grid,.menu-grid{grid-template-columns:1fr}.hero h2{font-size:36px}.section{padding:45px 24px}}
   </style>
 </head>
 
@@ -58,7 +66,7 @@
   <input id="catchCopy" placeholder="例：赤坂で楽しむ本格イタリアン">
 
   <label>メイン画像</label>
-<input type="file" id="heroImage" accept="image/*">
+  <input type="file" id="heroImage" accept="image/*">
 
   <h2>表示設定</h2>
   <div class="grid">
@@ -78,7 +86,7 @@
     <label>コンセプト本文</label>
     <textarea id="conceptText" placeholder="お店のこだわりや世界観を入力"></textarea>
     <label>コンセプト画像</label>
-<input type="file" id="conceptImage" accept="image/*">
+    <input type="file" id="conceptImage" accept="image/*">
   </div>
 
   <div class="input-section" id="inputCourse">
@@ -91,10 +99,24 @@
 
   <div class="input-section" id="inputMenu">
     <h2>メニュー</h2>
-    <label>MENU本文</label>
+    <label>MENU全体説明</label>
     <textarea id="menuText" placeholder="料理の特徴やおすすめメニュー"></textarea>
-    <label>MENU画像</label>
-<input type="file" id="menuImage" accept="image/*">
+
+    <div id="menuItems">
+      <div class="menu-item">
+        <h3>メニュー 1</h3>
+        <label>料理名</label>
+        <input class="menuName" placeholder="例：和牛ステーキ">
+        <label>説明</label>
+        <textarea class="menuDesc" placeholder="例：厳選した和牛を使用した人気メニュー"></textarea>
+        <label>価格</label>
+        <input class="menuPrice" placeholder="例：¥2,980">
+        <label>画像</label>
+        <input type="file" class="menuImage" accept="image/*">
+      </div>
+    </div>
+
+    <button type="button" class="add-btn" onclick="addMenuItem()">＋ メニュー追加</button>
   </div>
 
   <div class="input-section" id="inputLunch">
@@ -114,7 +136,7 @@
     <label>SPACE本文</label>
     <textarea id="spaceText" placeholder="店内空間、席、個室、貸切など"></textarea>
     <label>SPACE画像</label>
-<input type="file" id="spaceImage" accept="image/*">
+    <input type="file" id="spaceImage" accept="image/*">
   </div>
 
   <div class="input-section" id="inputNews">
@@ -161,7 +183,7 @@
     <div class="section" id="sectionMenu">
       <h3>MENU</h3>
       <p id="pMenuText"></p>
-      <div class="image" id="pMenuImage"></div>
+      <div class="menu-grid" id="pMenuCards"></div>
     </div>
 
     <div class="section" id="sectionLunch">
@@ -200,6 +222,8 @@
 </div>
 
 <script>
+let menuCount = 1;
+
 function val(id, fallback){
   return document.getElementById(id).value || fallback;
 }
@@ -212,33 +236,24 @@ function setText(id, text){
   document.getElementById(id).textContent = text;
 }
 
-function setBg(id, url){
-  const el = document.getElementById(id);
-  if(url){
-    el.style.backgroundImage = `linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.28)),url(${url})`;
-  }else{
-    el.style.backgroundImage = "none";
-  }
+function showBlock(id, isShow){
+  document.getElementById(id).style.display = isShow ? "block" : "none";
 }
+
 function setFileBg(inputId, previewId){
   const file = document.getElementById(inputId).files[0];
   const preview = document.getElementById(previewId);
 
   if(file){
     const reader = new FileReader();
-
     reader.onload = function(e){
       preview.style.backgroundImage =
-        `linear-gradient(rgba(0,0,0,.20),rgba(0,0,0,.20)),url(${e.target.result})`;
+        `linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)),url(${e.target.result})`;
     };
-
     reader.readAsDataURL(file);
   }else{
     preview.style.backgroundImage = "none";
   }
-}
-function showBlock(id, isShow){
-  document.getElementById(id).style.display = isShow ? "block" : "none";
 }
 
 function toggleInputs(){
@@ -249,6 +264,71 @@ function toggleInputs(){
   showBlock("inputDrink", checked("showDrink"));
   showBlock("inputSpace", checked("showSpace"));
   showBlock("inputNews", checked("showNews"));
+}
+
+function addMenuItem(){
+  menuCount++;
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "menu-item";
+  wrapper.innerHTML = `
+    <h3>メニュー ${menuCount}</h3>
+    <label>料理名</label>
+    <input class="menuName" placeholder="例：マルゲリータ">
+    <label>説明</label>
+    <textarea class="menuDesc" placeholder="例：香ばしく焼き上げた人気メニュー"></textarea>
+    <label>価格</label>
+    <input class="menuPrice" placeholder="例：¥1,480">
+    <label>画像</label>
+    <input type="file" class="menuImage" accept="image/*">
+  `;
+
+  document.getElementById("menuItems").appendChild(wrapper);
+}
+
+function createMenuCards(){
+  const names = document.querySelectorAll(".menuName");
+  const descs = document.querySelectorAll(".menuDesc");
+  const prices = document.querySelectorAll(".menuPrice");
+  const images = document.querySelectorAll(".menuImage");
+  const output = document.getElementById("pMenuCards");
+
+  output.innerHTML = "";
+
+  names.forEach((nameInput, index) => {
+    const name = nameInput.value;
+    const desc = descs[index].value;
+    const price = prices[index].value;
+    const file = images[index].files[0];
+
+    if(!name && !desc && !price && !file) return;
+
+    const card = document.createElement("div");
+    card.className = "menu-card";
+
+    const img = document.createElement("div");
+    img.className = "menu-card-img";
+
+    const body = document.createElement("div");
+    body.className = "menu-card-body";
+    body.innerHTML = `
+      <h4>${name || "メニュー名"}</h4>
+      <p>${desc || "メニュー説明"}</p>
+      <div class="price">${price || "価格未入力"}</div>
+    `;
+
+    card.appendChild(img);
+    card.appendChild(body);
+    output.appendChild(card);
+
+    if(file){
+      const reader = new FileReader();
+      reader.onload = function(e){
+        img.style.backgroundImage = `url(${e.target.result})`;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 }
 
 function createPreview(){
@@ -272,21 +352,11 @@ function createPreview(){
   setText("pAccess", val("access","未入力"));
   setText("pReserveUrl", val("reserveUrl","未入力"));
 
-  const heroFile = document.getElementById("heroImage").files[0];
-
-if(heroFile){
-  const reader = new FileReader();
-
-  reader.onload = function(e){
-    document.getElementById("pHero").style.backgroundImage =
-      `linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.28)),url(${e.target.result})`;
-  };
-
-  reader.readAsDataURL(heroFile);
-}
+  setFileBg("heroImage", "pHero");
   setFileBg("conceptImage", "pConceptImage");
-setFileBg("menuImage", "pMenuImage");
-setFileBg("spaceImage", "pSpaceImage");
+  setFileBg("spaceImage", "pSpaceImage");
+
+  createMenuCards();
 
   showBlock("sectionConcept", checked("showConcept"));
   showBlock("sectionCourse", checked("showCourse"));
@@ -312,6 +382,5 @@ setFileBg("spaceImage", "pSpaceImage");
 
 toggleInputs();
 </script>
-
 </body>
 </html>
