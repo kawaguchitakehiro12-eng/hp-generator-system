@@ -206,68 +206,137 @@
     }
 
     /* テンプレ別デザイン */
-    .theme-italian{
-      --bg:#17130f;
-      --panel:#fffaf0;
-      --text:#241b13;
-      --accent:#b68b3c;
-      --nav:#100c09;
-      --card:#f6efe2;
-    }
+    /* テンプレ別デザイン強化版 */
 
-    .theme-izakaya{
-      --bg:#2b1a10;
-      --panel:#fff7e8;
-      --text:#2b1a10;
-      --accent:#b15d24;
-      --nav:#241209;
-      --card:#fff0d6;
-    }
+.theme-italian{
+  --bg:#0f0b08;
+  --panel:#fff7ea;
+  --text:#25170d;
+  --accent:#b99045;
+  --nav:#0b0705;
+  --card:#f4e7d2;
+}
 
-    .theme-cafe{
-      --bg:#f7f1e8;
-      --panel:#fffdf8;
-      --text:#3c342d;
-      --accent:#b99b74;
-      --nav:#d8c4a8;
-      --card:#f6eee2;
-    }
+.theme-italian .hero{
+  min-height:620px;
+  border-bottom:8px solid var(--accent);
+}
 
-    .theme-bar{
-      --bg:#090911;
-      --panel:#141421;
-      --text:#f5f2ff;
-      --accent:#9b5cff;
-      --nav:#050508;
-      --card:#1f1f33;
-    }
+.theme-italian .section{
+  padding:90px 70px;
+}
 
-    .theme-washoku{
-      --bg:#161616;
-      --panel:#f7f3e8;
-      --text:#1d1d1d;
-      --accent:#9c7a2f;
-      --nav:#111;
-      --card:#eee6d6;
-    }
+.theme-italian .section h3{
+  font-size:38px;
+  border-bottom:1px solid var(--accent);
+  padding-bottom:14px;
+}
 
-    .theme-bar .section,
-    .theme-bar .preview{
-      color:#f5f2ff;
-    }
+.theme-izakaya{
+  --bg:#2a1609;
+  --panel:#fff1d6;
+  --text:#2b1608;
+  --accent:#d06b22;
+  --nav:#301305;
+  --card:#ffe3b2;
+}
 
-    .theme-bar .info-table p{
-      border-bottom:1px solid rgba(255,255,255,.15);
-    }
+.theme-izakaya .section{
+  border-radius:0;
+  background:linear-gradient(135deg,#fff1d6,#ffe2b5);
+}
 
-    .theme-cafe .hero h2{
-      font-size:50px;
-      letter-spacing:.05em;
-    }
+.theme-izakaya .section h3{
+  background:#2b1608;
+  color:#ffd28a;
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:4px;
+}
 
-    .theme-izakaya .hero h2{
-      text-shadow:0 5px 20px rgba(0,0,0,.45);
-    }
+.theme-izakaya .menu-card{
+  border:2px solid #8b3e12;
+}
+
+.theme-cafe{
+  --bg:#f8f2e9;
+  --panel:#fffdf8;
+  --text:#3b3028;
+  --accent:#c4a47c;
+  --nav:#d8c3a5;
+  --card:#f5ecdf;
+}
+
+.theme-cafe .hero{
+  height:500px;
+  border-radius:0 0 40px 40px;
+}
+
+.theme-cafe .section{
+  padding:80px 80px;
+}
+
+.theme-cafe .section h3{
+  font-size:30px;
+  color:#a8835e;
+}
+
+.theme-cafe .menu-card{
+  border-radius:28px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.theme-bar{
+  --bg:#070711;
+  --panel:#12121f;
+  --text:#f5f2ff;
+  --accent:#a855f7;
+  --nav:#050508;
+  --card:#1f1f33;
+}
+
+.theme-bar .section{
+  background:#12121f;
+  color:#f5f2ff;
+  border-bottom:1px solid rgba(168,85,247,.35);
+}
+
+.theme-bar .section h3{
+  color:#c084fc;
+  text-shadow:0 0 18px rgba(168,85,247,.8);
+}
+
+.theme-bar .menu-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(168,85,247,.45);
+  box-shadow:0 0 25px rgba(168,85,247,.18);
+}
+
+.theme-washoku{
+  --bg:#12100d;
+  --panel:#f5efe2;
+  --text:#17120c;
+  --accent:#9b7a30;
+  --nav:#111;
+  --card:#eee2cc;
+}
+
+.theme-washoku .section{
+  background:#f5efe2;
+  border-left:8px solid var(--accent);
+}
+
+.theme-washoku .section h3{
+  writing-mode:horizontal-tb;
+  letter-spacing:.18em;
+  border-left:4px solid var(--accent);
+  padding-left:16px;
+}
+
+.theme-washoku .menu-card{
+  border-radius:4px;
+  border:1px solid #b9a36c;
+}
 
     @media(max-width:800px){
       .grid,.menu-grid{grid-template-columns:1fr}
