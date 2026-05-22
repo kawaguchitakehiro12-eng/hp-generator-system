@@ -4,56 +4,293 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HP発電機システム</title>
+
   <style>
-    body{font-family:"Noto Serif JP",serif;background:#f4f1ec;margin:0;color:#222;}
-    .admin{max-width:1100px;margin:40px auto;background:#fff;padding:32px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08);}
+    :root{
+      --bg:#f4f1ec;
+      --panel:#ffffff;
+      --text:#222;
+      --accent:#8b6f3e;
+      --dark:#111;
+      --nav:#111;
+      --card:#fafafa;
+    }
+
+    body{
+      font-family:"Noto Serif JP",serif;
+      background:var(--bg);
+      margin:0;
+      color:var(--text);
+    }
+
+    .admin{
+      max-width:1100px;
+      margin:40px auto;
+      background:#fff;
+      padding:32px;
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
     h1{font-size:32px;margin-bottom:8px;}
     h2{margin-top:36px;border-left:5px solid #8b6f3e;padding-left:12px;}
+
     label{font-weight:bold;margin-top:18px;display:block;}
-    input,textarea,select{width:100%;padding:12px;margin-top:8px;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;font-size:15px;}
+
+    input,textarea,select{
+      width:100%;
+      padding:12px;
+      margin-top:8px;
+      border:1px solid #ddd;
+      border-radius:8px;
+      box-sizing:border-box;
+      font-size:15px;
+    }
+
     textarea{min-height:90px;}
-    button{background:#111;color:white;border:none;padding:14px 22px;border-radius:8px;margin-top:24px;cursor:pointer;font-size:16px;}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-    .toggle{display:flex;align-items:center;gap:10px;background:#f8f8f8;padding:12px;border-radius:10px;margin-top:12px;}
+
+    button{
+      background:#111;
+      color:white;
+      border:none;
+      padding:14px 22px;
+      border-radius:8px;
+      margin-top:24px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .toggle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#f8f8f8;
+      padding:12px;
+      border-radius:10px;
+      margin-top:12px;
+    }
+
     .toggle input{width:auto;margin:0;}
     .input-section{display:block;}
-    .menu-item{background:#fafafa;border:1px solid #eee;border-radius:14px;padding:20px;margin-top:18px;}
+
+    .menu-item{
+      background:#fafafa;
+      border:1px solid #eee;
+      border-radius:14px;
+      padding:20px;
+      margin-top:18px;
+    }
+
     .add-btn{background:#8b6f3e;}
-    .preview{display:none;margin-top:50px;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #ddd;}
-    .hero{height:520px;background:#111;color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;background-size:cover;background-position:center;}
-    .hero h2{font-size:54px;border:none;padding:0;margin:0 0 16px;letter-spacing:.08em;}
-    .hero p{font-size:20px;}
-    .nav{background:#111;color:white;padding:18px;text-align:center;letter-spacing:.12em;font-size:14px;}
-    .section{padding:70px 55px;border-bottom:1px solid #eee;}
-    .section h3{font-size:32px;margin-bottom:18px;color:#8b6f3e;letter-spacing:.08em;}
-    .section p{line-height:1.9;white-space:pre-wrap;}
-    .image{width:100%;height:320px;background:#ddd;border-radius:14px;background-size:cover;background-position:center;margin-top:24px;}
-    .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px;}
-    .menu-card{background:#fafafa;border-radius:14px;overflow:hidden;border:1px solid #eee;}
-    .menu-card-img{height:220px;background:#ddd;background-size:cover;background-position:center;}
-    .menu-card-body{padding:20px;}
-    .menu-card-body h4{font-size:22px;margin:0 0 10px;}
-    .price{font-weight:bold;color:#8b6f3e;font-size:18px;margin-top:12px;}
-    .info-table p{border-bottom:1px solid #eee;padding:12px 0;margin:0;}
-    @media(max-width:800px){.grid,.menu-grid{grid-template-columns:1fr}.hero h2{font-size:36px}.section{padding:45px 24px}}
+
+    .preview{
+      display:none;
+      margin-top:50px;
+      background:var(--panel);
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid #ddd;
+      transition:.3s;
+    }
+
+    .hero{
+      height:560px;
+      background:#111;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:30px;
+      background-size:cover;
+      background-position:center;
+      position:relative;
+    }
+
+    .hero h2{
+      font-size:58px;
+      border:none;
+      padding:0;
+      margin:0 0 18px;
+      letter-spacing:.12em;
+    }
+
+    .hero p{
+      font-size:20px;
+      letter-spacing:.08em;
+    }
+
+    .nav{
+      background:var(--nav);
+      color:white;
+      padding:18px;
+      text-align:center;
+      letter-spacing:.12em;
+      font-size:14px;
+    }
+
+    .section{
+      padding:76px 58px;
+      border-bottom:1px solid rgba(0,0,0,.08);
+      background:var(--panel);
+    }
+
+    .section h3{
+      font-size:34px;
+      margin-bottom:18px;
+      color:var(--accent);
+      letter-spacing:.12em;
+    }
+
+    .section p{
+      line-height:1.9;
+      white-space:pre-wrap;
+    }
+
+    .image{
+      width:100%;
+      height:330px;
+      background:#ddd;
+      border-radius:14px;
+      background-size:cover;
+      background-position:center;
+      margin-top:24px;
+    }
+
+    .menu-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin-top:28px;
+    }
+
+    .menu-card{
+      background:var(--card);
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.08);
+    }
+
+    .menu-card-img{
+      height:230px;
+      background:#ddd;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .menu-card-body{padding:22px;}
+
+    .menu-card-body h4{
+      font-size:22px;
+      margin:0 0 10px;
+    }
+
+    .price{
+      font-weight:bold;
+      color:var(--accent);
+      font-size:18px;
+      margin-top:12px;
+    }
+
+    .info-table p{
+      border-bottom:1px solid rgba(0,0,0,.08);
+      padding:12px 0;
+      margin:0;
+    }
+
+    /* テンプレ別デザイン */
+    .theme-italian{
+      --bg:#17130f;
+      --panel:#fffaf0;
+      --text:#241b13;
+      --accent:#b68b3c;
+      --nav:#100c09;
+      --card:#f6efe2;
+    }
+
+    .theme-izakaya{
+      --bg:#2b1a10;
+      --panel:#fff7e8;
+      --text:#2b1a10;
+      --accent:#b15d24;
+      --nav:#241209;
+      --card:#fff0d6;
+    }
+
+    .theme-cafe{
+      --bg:#f7f1e8;
+      --panel:#fffdf8;
+      --text:#3c342d;
+      --accent:#b99b74;
+      --nav:#d8c4a8;
+      --card:#f6eee2;
+    }
+
+    .theme-bar{
+      --bg:#090911;
+      --panel:#141421;
+      --text:#f5f2ff;
+      --accent:#9b5cff;
+      --nav:#050508;
+      --card:#1f1f33;
+    }
+
+    .theme-washoku{
+      --bg:#161616;
+      --panel:#f7f3e8;
+      --text:#1d1d1d;
+      --accent:#9c7a2f;
+      --nav:#111;
+      --card:#eee6d6;
+    }
+
+    .theme-bar .section,
+    .theme-bar .preview{
+      color:#f5f2ff;
+    }
+
+    .theme-bar .info-table p{
+      border-bottom:1px solid rgba(255,255,255,.15);
+    }
+
+    .theme-cafe .hero h2{
+      font-size:50px;
+      letter-spacing:.05em;
+    }
+
+    .theme-izakaya .hero h2{
+      text-shadow:0 5px 20px rgba(0,0,0,.45);
+    }
+
+    @media(max-width:800px){
+      .grid,.menu-grid{grid-template-columns:1fr}
+      .hero h2{font-size:36px}
+      .section{padding:45px 24px}
+    }
   </style>
 </head>
 
 <body>
 <div class="admin">
   <h1>HP発電機システム</h1>
-  <p>表示したい項目だけONにして、飲食店向けHPプレビューを自動生成します。</p>
+  <p>テンプレートを選ぶと、プレビューのデザインが自動で切り替わります。</p>
 
   <h2>基本情報</h2>
   <div class="grid">
     <div>
       <label>テンプレート</label>
-      <select id="template">
-        <option>イタリアン</option>
-        <option>居酒屋</option>
-        <option>カフェ</option>
-        <option>バー</option>
-        <option>和食</option>
+      <select id="template" onchange="applyTheme()">
+        <option value="italian">イタリアン</option>
+        <option value="izakaya">居酒屋</option>
+        <option value="cafe">カフェ</option>
+        <option value="bar">バー</option>
+        <option value="washoku">和食</option>
       </select>
     </div>
     <div>
@@ -78,8 +315,7 @@
     <label class="toggle"><input type="checkbox" id="showSpace" checked onchange="toggleInputs()">SPACEを表示</label>
     <label class="toggle"><input type="checkbox" id="showNews" checked onchange="toggleInputs()">NEWSを表示</label>
   </div>
-
-  <div class="input-section" id="inputConcept">
+    <div class="input-section" id="inputConcept">
     <h2>コンセプト</h2>
     <label>コンセプト見出し</label>
     <input id="conceptTitle" placeholder="例：本場イタリアの空気を感じるレストラン">
@@ -157,7 +393,7 @@
 
   <button onclick="createPreview()">HPを作成する</button>
 
-  <div class="preview" id="preview">
+  <div class="preview theme-italian" id="preview">
     <div class="nav" id="pNav"></div>
 
     <div class="hero" id="pHero">
@@ -240,6 +476,21 @@ function showBlock(id, isShow){
   document.getElementById(id).style.display = isShow ? "block" : "none";
 }
 
+function applyTheme(){
+  const template = document.getElementById("template").value;
+  const preview = document.getElementById("preview");
+
+  preview.classList.remove(
+    "theme-italian",
+    "theme-izakaya",
+    "theme-cafe",
+    "theme-bar",
+    "theme-washoku"
+  );
+
+  preview.classList.add("theme-" + template);
+}
+
 function setFileBg(inputId, previewId){
   const file = document.getElementById(inputId).files[0];
   const preview = document.getElementById(previewId);
@@ -248,7 +499,7 @@ function setFileBg(inputId, previewId){
     const reader = new FileReader();
     reader.onload = function(e){
       preview.style.backgroundImage =
-        `linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.25)),url(${e.target.result})`;
+        `linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),url(${e.target.result})`;
     };
     reader.readAsDataURL(file);
   }else{
@@ -332,6 +583,8 @@ function createMenuCards(){
 }
 
 function createPreview(){
+  applyTheme();
+
   setText("pShopName", val("shopName","店舗名"));
   setText("pCatchCopy", val("catchCopy","キャッチコピー"));
 
@@ -381,6 +634,8 @@ function createPreview(){
 }
 
 toggleInputs();
+applyTheme();
 </script>
+
 </body>
 </html>
