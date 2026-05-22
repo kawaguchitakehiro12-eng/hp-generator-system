@@ -377,7 +377,55 @@ button{
 
 /* テーマ差分 */
 .theme-italian{--dark:#140f0a;--paper:#fff8ee;--accent:#a9833d;}
-.theme-izakaya{--dark:#211007;--paper:#fff1d6;--accent:#c76724;}
+.theme-izakaya{
+  --dark:#1b0f08;
+  --paper:#f3e2c3;
+  --ink:#24160b;
+  --sub:#6b5037;
+  --accent:#b66a2c;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.45), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(120,70,30,.12), transparent 24%),
+    linear-gradient(135deg,#f8ecd1,#ead2a8);
+}
+  .theme-izakaya .preview,
+.theme-izakaya .story-section,
+.theme-izakaya .floor-section,
+.theme-izakaya .info-section{
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.28), rgba(255,255,255,0)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(120,80,40,.035) 0px,
+      rgba(120,80,40,.035) 2px,
+      transparent 2px,
+      transparent 7px
+    ),
+    #f3e2c3;
+}
+
+.theme-izakaya .lead-copy,
+.theme-izakaya .menu-section,
+.theme-izakaya .news-section{
+  background:
+    radial-gradient(circle at top left, rgba(255,210,138,.12), transparent 30%),
+    linear-gradient(135deg,#1b0f08,#321706);
+}
+
+.theme-izakaya .site-header{
+  background:#1b0f08;
+}
+
+.theme-izakaya .photo-frame{
+  box-shadow:20px 20px 0 rgba(98,50,18,.16);
+  border:1px solid rgba(90,45,18,.22);
+}
+
+.theme-izakaya .menu-card{
+  background:#fff0cf;
+  border:1px solid rgba(110,55,18,.28);
+}
 .theme-cafe{--dark:#d6c0a2;--paper:#fffdf8;--ink:#40362f;--accent:#b7956f;}
 .theme-bar{--dark:#060611;--paper:#13131e;--ink:#f5f2ff;--sub:#cfc9e8;--accent:#a855f7;}
 .theme-washoku{--dark:#111;--paper:#f4efe2;--accent:#967331;}
