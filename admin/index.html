@@ -549,16 +549,21 @@ function showBlock(id, isShow){
 function applyTheme(){
   const template = document.getElementById("template").value;
   const preview = document.getElementById("preview");
+  const body = document.body;
 
-  preview.classList.remove(
+  const themes = [
     "theme-italian",
     "theme-izakaya",
     "theme-cafe",
     "theme-bar",
     "theme-washoku"
-  );
+  ];
+
+  preview.classList.remove(...themes);
+  body.classList.remove(...themes);
 
   preview.classList.add("theme-" + template);
+  body.classList.add("theme-" + template);
 }
 
 function setFileBg(inputId, previewId){
