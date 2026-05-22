@@ -1,355 +1,432 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HP発電機システム</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HP発電機システム</title>
 
-  <style>
-    :root{
-      --bg:#f4f1ec;
-      --panel:#ffffff;
-      --text:#222;
-      --accent:#8b6f3e;
-      --dark:#111;
-      --nav:#111;
-      --card:#fafafa;
-    }
-
-    body{
-      font-family:"Noto Serif JP",serif;
-      background:var(--bg);
-      margin:0;
-      color:var(--text);
-    }
-
-    .admin{
-      max-width:1100px;
-      margin:40px auto;
-      background:#fff;
-      padding:32px;
-      border-radius:18px;
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-    }
-
-    h1{font-size:32px;margin-bottom:8px;}
-    h2{margin-top:36px;border-left:5px solid #8b6f3e;padding-left:12px;}
-
-    label{font-weight:bold;margin-top:18px;display:block;}
-
-    input,textarea,select{
-      width:100%;
-      padding:12px;
-      margin-top:8px;
-      border:1px solid #ddd;
-      border-radius:8px;
-      box-sizing:border-box;
-      font-size:15px;
-    }
-
-    textarea{min-height:90px;}
-
-    button{
-      background:#111;
-      color:white;
-      border:none;
-      padding:14px 22px;
-      border-radius:8px;
-      margin-top:24px;
-      cursor:pointer;
-      font-size:16px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px;
-    }
-
-    .toggle{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      background:#f8f8f8;
-      padding:12px;
-      border-radius:10px;
-      margin-top:12px;
-    }
-
-    .toggle input{width:auto;margin:0;}
-    .input-section{display:block;}
-
-    .menu-item{
-      background:#fafafa;
-      border:1px solid #eee;
-      border-radius:14px;
-      padding:20px;
-      margin-top:18px;
-    }
-
-    .add-btn{background:#8b6f3e;}
-
-    .preview{
-      display:none;
-      margin-top:50px;
-      background:var(--panel);
-      color:var(--text);
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid #ddd;
-      transition:.3s;
-    }
-
-    .hero{
-      height:560px;
-      background:#111;
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:30px;
-      background-size:cover;
-      background-position:center;
-      position:relative;
-    }
-
-    .hero h2{
-      font-size:58px;
-      border:none;
-      padding:0;
-      margin:0 0 18px;
-      letter-spacing:.12em;
-    }
-
-    .hero p{
-      font-size:20px;
-      letter-spacing:.08em;
-    }
-
-    .nav{
-      background:var(--nav);
-      color:white;
-      padding:18px;
-      text-align:center;
-      letter-spacing:.12em;
-      font-size:14px;
-    }
-
-    .section{
-      padding:76px 58px;
-      border-bottom:1px solid rgba(0,0,0,.08);
-      background:var(--panel);
-    }
-
-    .section h3{
-      font-size:34px;
-      margin-bottom:18px;
-      color:var(--accent);
-      letter-spacing:.12em;
-    }
-
-    .section p{
-      line-height:1.9;
-      white-space:pre-wrap;
-    }
-
-    .image{
-      width:100%;
-      height:330px;
-      background:#ddd;
-      border-radius:14px;
-      background-size:cover;
-      background-position:center;
-      margin-top:24px;
-    }
-
-    .menu-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:24px;
-      margin-top:28px;
-    }
-
-    .menu-card{
-      background:var(--card);
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid rgba(0,0,0,.08);
-    }
-
-    .menu-card-img{
-      height:230px;
-      background:#ddd;
-      background-size:cover;
-      background-position:center;
-    }
-
-    .menu-card-body{padding:22px;}
-
-    .menu-card-body h4{
-      font-size:22px;
-      margin:0 0 10px;
-    }
-
-    .price{
-      font-weight:bold;
-      color:var(--accent);
-      font-size:18px;
-      margin-top:12px;
-    }
-
-    .info-table p{
-      border-bottom:1px solid rgba(0,0,0,.08);
-      padding:12px 0;
-      margin:0;
-    }
-
-    /* テンプレ別デザイン */
-    /* テンプレ別デザイン強化版 */
-
-.theme-italian{
-  --bg:#0f0b08;
-  --panel:#fff7ea;
-  --text:#25170d;
-  --accent:#b99045;
-  --nav:#0b0705;
-  --card:#f4e7d2;
+<style>
+:root{
+  --bg:#efe9df;
+  --paper:#fffaf2;
+  --ink:#1d1712;
+  --sub:#6d6258;
+  --accent:#9b7a3b;
+  --dark:#17120d;
+  --line:rgba(29,23,18,.14);
 }
 
-.theme-italian .hero{
-  min-height:620px;
-  border-bottom:8px solid var(--accent);
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Times New Roman","Noto Serif JP",serif;
 }
 
-.theme-italian .section{
-  padding:90px 70px;
+.admin{
+  max-width:1120px;
+  margin:40px auto;
+  background:#fff;
+  padding:32px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.08);
 }
 
-.theme-italian .section h3{
+h1{font-size:32px;margin:0 0 8px;}
+h2{margin-top:36px;border-left:5px solid var(--accent);padding-left:12px;}
+label{font-weight:bold;margin-top:18px;display:block;}
+
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  margin-top:8px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  box-sizing:border-box;
+  font-size:15px;
+}
+
+textarea{min-height:92px;}
+
+button{
+  background:#111;
+  color:#fff;
+  border:0;
+  padding:14px 24px;
+  border-radius:8px;
+  margin-top:24px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+
+.toggle{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#f7f7f7;
+  padding:12px;
+  border-radius:10px;
+}
+
+.toggle input{width:auto;margin:0;}
+
+.input-section{display:block;}
+
+.menu-item{
+  background:#fafafa;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:20px;
+  margin-top:18px;
+}
+
+.add-btn{background:var(--accent);}
+
+.preview{
+  display:none;
+  margin-top:54px;
+  overflow:hidden;
+  background:var(--paper);
+  border-radius:24px;
+  border:1px solid var(--line);
+}
+
+/* ===== 参考サイト寄せプレビュー ===== */
+
+.site-header{
+  position:relative;
+  background:var(--dark);
+  color:#fff;
+}
+
+.site-nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 42px;
+  border-bottom:1px solid rgba(255,255,255,.16);
+  letter-spacing:.12em;
+}
+
+.site-logo{
+  font-size:22px;
+  letter-spacing:.18em;
+}
+
+.site-menu{
+  font-size:13px;
+  color:rgba(255,255,255,.78);
+}
+
+.hero{
+  min-height:680px;
+  background:#111;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,.22),rgba(0,0,0,.58));
+}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+  color:#fff;
+  padding:30px;
+}
+
+.hero-kicker{
+  font-size:15px;
+  letter-spacing:.35em;
+  color:#d7c08a;
+  margin-bottom:22px;
+}
+
+.hero h2{
+  font-size:62px;
+  letter-spacing:.18em;
+  margin:0 0 24px;
+  font-weight:400;
+}
+
+.hero p{
+  font-size:22px;
+  letter-spacing:.12em;
+  line-height:1.9;
+}
+
+.lead-copy{
+  background:var(--dark);
+  color:#fff;
+  padding:90px 50px;
+  text-align:center;
+}
+
+.lead-copy h3{
+  font-size:42px;
+  letter-spacing:.22em;
+  font-weight:400;
+  margin:0 0 28px;
+  color:#d7c08a;
+}
+
+.lead-copy p{
+  max-width:760px;
+  margin:0 auto;
+  line-height:2.2;
+  font-size:17px;
+}
+
+.story-section{
+  padding:110px 70px;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+}
+
+.story-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:58px;
+  align-items:center;
+}
+
+.story-grid.reverse{
+  grid-template-columns:.95fr 1.05fr;
+}
+
+.story-text .en{
+  color:var(--accent);
+  letter-spacing:.25em;
+  font-size:14px;
+  margin-bottom:14px;
+  text-transform:uppercase;
+}
+
+.story-text h3{
   font-size:38px;
-  border-bottom:1px solid var(--accent);
-  padding-bottom:14px;
+  line-height:1.65;
+  font-weight:400;
+  margin:0 0 24px;
 }
 
-.theme-izakaya{
-  --bg:#2a1609;
-  --panel:#fff1d6;
-  --text:#2b1608;
-  --accent:#d06b22;
-  --nav:#301305;
-  --card:#ffe3b2;
+.story-text p{
+  line-height:2.2;
+  color:var(--sub);
+  white-space:pre-wrap;
 }
 
-.theme-izakaya .section{
-  border-radius:0;
-  background:linear-gradient(135deg,#fff1d6,#ffe2b5);
+.photo-frame{
+  min-height:410px;
+  background:#ddd;
+  background-size:cover;
+  background-position:center;
+  border-radius:2px;
+  box-shadow:24px 24px 0 rgba(155,122,59,.16);
 }
 
-.theme-izakaya .section h3{
-  background:#2b1608;
-  color:#ffd28a;
+.menu-section{
+  background:#17120d;
+  color:#fff;
+  padding:110px 70px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:54px;
+}
+
+.section-title .en{
+  color:#d7c08a;
+  letter-spacing:.35em;
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.section-title h3{
+  font-size:42px;
+  font-weight:400;
+  letter-spacing:.18em;
+  margin:0;
+}
+
+.section-title p{
+  max-width:760px;
+  margin:24px auto 0;
+  color:rgba(255,255,255,.75);
+  line-height:2;
+  white-space:pre-wrap;
+}
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:34px;
+}
+
+.menu-card{
+  background:#231b13;
+  border:1px solid rgba(215,192,138,.28);
+}
+
+.menu-card-img{
+  height:280px;
+  background:#333;
+  background-size:cover;
+  background-position:center;
+}
+
+.menu-card-body{
+  padding:28px;
+}
+
+.menu-card-body h4{
+  margin:0 0 14px;
+  font-size:24px;
+  font-weight:400;
+  color:#fff;
+}
+
+.menu-card-body p{
+  line-height:1.9;
+  color:rgba(255,255,255,.72);
+  white-space:pre-wrap;
+}
+
+.price{
+  margin-top:18px;
+  color:#d7c08a;
+  font-size:19px;
+  letter-spacing:.08em;
+}
+
+.wine-section{
+  padding:110px 70px;
+  background:#f7f1e8;
+}
+
+.floor-section{
+  padding:110px 70px;
+  background:var(--paper);
+}
+
+.news-section{
+  padding:80px 70px;
+  background:#17120d;
+  color:#fff;
+  text-align:center;
+}
+
+.news-section h3{
+  color:#d7c08a;
+  letter-spacing:.25em;
+  font-weight:400;
+}
+
+.news-section p{
+  white-space:pre-wrap;
+  line-height:2;
+}
+
+.info-section{
+  padding:110px 70px;
+  background:#f4efe6;
+}
+
+.info-wrap{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:50px;
+}
+
+.info-logo{
+  font-size:34px;
+  letter-spacing:.18em;
+  line-height:1.5;
+}
+
+.info-table p{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:20px;
+  border-bottom:1px solid var(--line);
+  padding:16px 0;
+  margin:0;
+  line-height:1.8;
+}
+
+.reserve-btn{
   display:inline-block;
-  padding:10px 18px;
-  border-radius:4px;
+  margin-top:28px;
+  padding:14px 28px;
+  background:var(--dark);
+  color:#fff;
+  text-decoration:none;
+  letter-spacing:.12em;
 }
 
-.theme-izakaya .menu-card{
-  border:2px solid #8b3e12;
+/* テーマ差分 */
+.theme-italian{--dark:#140f0a;--paper:#fff8ee;--accent:#a9833d;}
+.theme-izakaya{--dark:#211007;--paper:#fff1d6;--accent:#c76724;}
+.theme-cafe{--dark:#d6c0a2;--paper:#fffdf8;--ink:#40362f;--accent:#b7956f;}
+.theme-bar{--dark:#060611;--paper:#13131e;--ink:#f5f2ff;--sub:#cfc9e8;--accent:#a855f7;}
+.theme-washoku{--dark:#111;--paper:#f4efe2;--accent:#967331;}
+
+.theme-cafe .site-header,
+.theme-cafe .lead-copy,
+.theme-cafe .menu-section,
+.theme-cafe .news-section{
+  color:#3d332c;
 }
 
-.theme-cafe{
-  --bg:#f8f2e9;
-  --panel:#fffdf8;
-  --text:#3b3028;
-  --accent:#c4a47c;
-  --nav:#d8c3a5;
-  --card:#f5ecdf;
+.theme-cafe .hero::after{
+  background:linear-gradient(90deg,rgba(255,255,255,.45),rgba(255,255,255,.08),rgba(255,255,255,.35));
 }
 
-.theme-cafe .hero{
-  height:500px;
-  border-radius:0 0 40px 40px;
-}
-
-.theme-cafe .section{
-  padding:80px 80px;
-}
-
-.theme-cafe .section h3{
-  font-size:30px;
-  color:#a8835e;
-}
-
-.theme-cafe .menu-card{
-  border-radius:28px;
-  box-shadow:0 12px 30px rgba(0,0,0,.08);
-}
-
-.theme-bar{
-  --bg:#070711;
-  --panel:#12121f;
-  --text:#f5f2ff;
-  --accent:#a855f7;
-  --nav:#050508;
-  --card:#1f1f33;
-}
-
-.theme-bar .section{
-  background:#12121f;
+.theme-bar .story-section,
+.theme-bar .floor-section,
+.theme-bar .info-section{
+  background:#13131e;
   color:#f5f2ff;
-  border-bottom:1px solid rgba(168,85,247,.35);
 }
 
-.theme-bar .section h3{
-  color:#c084fc;
-  text-shadow:0 0 18px rgba(168,85,247,.8);
+.theme-bar .story-text p,
+.theme-bar .info-table p{
+  color:#cfc9e8;
 }
 
 .theme-bar .menu-card{
   background:rgba(255,255,255,.06);
-  border:1px solid rgba(168,85,247,.45);
-  box-shadow:0 0 25px rgba(168,85,247,.18);
+  border-color:rgba(168,85,247,.42);
 }
 
-.theme-washoku{
-  --bg:#12100d;
-  --panel:#f5efe2;
-  --text:#17120c;
-  --accent:#9b7a30;
-  --nav:#111;
-  --card:#eee2cc;
+@media(max-width:800px){
+  .admin{margin:0;border-radius:0;padding:22px;}
+  .grid,.story-grid,.story-grid.reverse,.menu-grid,.info-wrap{grid-template-columns:1fr;}
+  .site-nav{padding:18px 22px;display:block;}
+  .site-menu{margin-top:10px;line-height:1.8;}
+  .hero{min-height:560px;}
+  .hero h2{font-size:38px;}
+  .story-section,.menu-section,.wine-section,.floor-section,.info-section{padding:70px 24px;}
+  .info-table p{grid-template-columns:1fr;}
 }
-
-.theme-washoku .section{
-  background:#f5efe2;
-  border-left:8px solid var(--accent);
-}
-
-.theme-washoku .section h3{
-  writing-mode:horizontal-tb;
-  letter-spacing:.18em;
-  border-left:4px solid var(--accent);
-  padding-left:16px;
-}
-
-.theme-washoku .menu-card{
-  border-radius:4px;
-  border:1px solid #b9a36c;
-}
-
-    @media(max-width:800px){
-      .grid,.menu-grid{grid-template-columns:1fr}
-      .hero h2{font-size:36px}
-      .section{padding:45px 24px}
-    }
-  </style>
+</style>
 </head>
 
 <body>
 <div class="admin">
   <h1>HP発電機システム</h1>
-  <p>テンプレートを選ぶと、プレビューのデザインが自動で切り替わります。</p>
+  <p>高級飲食店HP風のプレビューを自動生成します。</p>
 
   <h2>基本情報</h2>
   <div class="grid">
@@ -365,12 +442,12 @@
     </div>
     <div>
       <label>店舗名</label>
-      <input id="shopName" placeholder="例：IL CARDINALE AKASAKA">
+      <input id="shopName" placeholder="例：ku:de kiyo">
     </div>
   </div>
 
   <label>キャッチコピー</label>
-  <input id="catchCopy" placeholder="例：赤坂で楽しむ本格イタリアン">
+  <input id="catchCopy" placeholder="例：記憶に残る一皿とは">
 
   <label>メイン画像</label>
   <input type="file" id="heroImage" accept="image/*">
@@ -380,15 +457,16 @@
     <label class="toggle"><input type="checkbox" id="showConcept" checked onchange="toggleInputs()">CONCEPTを表示</label>
     <label class="toggle"><input type="checkbox" id="showCourse" checked onchange="toggleInputs()">COURSEを表示</label>
     <label class="toggle"><input type="checkbox" id="showMenu" checked onchange="toggleInputs()">MENUを表示</label>
-    <label class="toggle"><input type="checkbox" id="showLunch" checked onchange="toggleInputs()">LUNCH & CAFEを表示</label>
-    <label class="toggle"><input type="checkbox" id="showDrink" checked onchange="toggleInputs()">DRINKを表示</label>
-    <label class="toggle"><input type="checkbox" id="showSpace" checked onchange="toggleInputs()">SPACEを表示</label>
+    <label class="toggle"><input type="checkbox" id="showLunch" checked onchange="toggleInputs()">LUNCHを表示</label>
+    <label class="toggle"><input type="checkbox" id="showDrink" checked onchange="toggleInputs()">WINE / DRINKを表示</label>
+    <label class="toggle"><input type="checkbox" id="showSpace" checked onchange="toggleInputs()">FLOORを表示</label>
     <label class="toggle"><input type="checkbox" id="showNews" checked onchange="toggleInputs()">NEWSを表示</label>
   </div>
-    <div class="input-section" id="inputConcept">
+
+  <div class="input-section" id="inputConcept">
     <h2>コンセプト</h2>
     <label>コンセプト見出し</label>
-    <input id="conceptTitle" placeholder="例：本場イタリアの空気を感じるレストラン">
+    <input id="conceptTitle" placeholder="例：「あれが美味しかった」に出合うこと">
     <label>コンセプト本文</label>
     <textarea id="conceptText" placeholder="お店のこだわりや世界観を入力"></textarea>
     <label>コンセプト画像</label>
@@ -398,7 +476,7 @@
   <div class="input-section" id="inputCourse">
     <h2>コース</h2>
     <label>COURSE見出し</label>
-    <input id="courseTitle" placeholder="例：COURSE">
+    <input id="courseTitle" placeholder="例：素材を活かした“今日”を味わうコース">
     <label>COURSE本文</label>
     <textarea id="courseText" placeholder="コース内容や利用シーンを入力"></textarea>
   </div>
@@ -412,11 +490,11 @@
       <div class="menu-item">
         <h3>メニュー 1</h3>
         <label>料理名</label>
-        <input class="menuName" placeholder="例：和牛ステーキ">
+        <input class="menuName" placeholder="例：季節の前菜">
         <label>説明</label>
-        <textarea class="menuDesc" placeholder="例：厳選した和牛を使用した人気メニュー"></textarea>
+        <textarea class="menuDesc" placeholder="例：旬の食材を活かした一皿"></textarea>
         <label>価格</label>
-        <input class="menuPrice" placeholder="例：¥2,980">
+        <input class="menuPrice" placeholder="例：¥1,800">
         <label>画像</label>
         <input type="file" class="menuImage" accept="image/*">
       </div>
@@ -426,22 +504,22 @@
   </div>
 
   <div class="input-section" id="inputLunch">
-    <h2>ランチ・カフェ</h2>
-    <label>LUNCH & CAFE本文</label>
-    <textarea id="lunchText" placeholder="ランチやカフェ利用について"></textarea>
+    <h2>ランチ</h2>
+    <label>LUNCH本文</label>
+    <textarea id="lunchText" placeholder="ランチ利用について"></textarea>
   </div>
 
   <div class="input-section" id="inputDrink">
-    <h2>ドリンク</h2>
-    <label>DRINK本文</label>
-    <textarea id="drinkText" placeholder="ワイン、カクテル、ソフトドリンクなど"></textarea>
+    <h2>ワイン・ドリンク</h2>
+    <label>WINE / DRINK本文</label>
+    <textarea id="drinkText" placeholder="ワイン、カクテル、ドリンクについて"></textarea>
   </div>
 
   <div class="input-section" id="inputSpace">
     <h2>空間・席</h2>
-    <label>SPACE本文</label>
+    <label>FLOOR本文</label>
     <textarea id="spaceText" placeholder="店内空間、席、個室、貸切など"></textarea>
-    <label>SPACE画像</label>
+    <label>FLOOR画像</label>
     <input type="file" id="spaceImage" accept="image/*">
   </div>
 
@@ -456,7 +534,7 @@
     <div><label>住所</label><input id="address" placeholder="東京都港区赤坂〇〇"></div>
     <div><label>電話番号</label><input id="tel" placeholder="03-0000-0000"></div>
     <div><label>営業時間</label><input id="hours" placeholder="11:00〜23:00"></div>
-    <div><label>定休日</label><input id="holiday" placeholder="年中無休"></div>
+    <div><label>定休日</label><input id="holiday" placeholder="水曜日"></div>
     <div><label>アクセス</label><input id="access" placeholder="赤坂駅 徒歩1分"></div>
     <div><label>予約URL</label><input id="reserveUrl" placeholder="https://..."></div>
   </div>
@@ -464,64 +542,107 @@
   <button onclick="createPreview()">HPを作成する</button>
 
   <div class="preview theme-italian" id="preview">
-    <div class="nav" id="pNav"></div>
+    <div class="site-header">
+      <div class="site-nav">
+        <div class="site-logo" id="pLogo">SHOP NAME</div>
+        <div class="site-menu" id="pNav"></div>
+      </div>
 
-    <div class="hero" id="pHero">
-      <div>
-        <h2 id="pShopName">店舗名</h2>
-        <p id="pCatchCopy">キャッチコピー</p>
+      <div class="hero" id="pHero">
+        <div class="hero-inner">
+          <div class="hero-kicker">RESTAURANT</div>
+          <h2 id="pShopName">店舗名</h2>
+          <p id="pCatchCopy">キャッチコピー</p>
+        </div>
       </div>
     </div>
 
-    <div class="section" id="sectionConcept">
-      <h3>CONCEPT</h3>
-      <h4 id="pConceptTitle"></h4>
+    <div class="lead-copy" id="sectionConcept">
+      <h3 id="pConceptTitle"></h3>
       <p id="pConceptText"></p>
-      <div class="image" id="pConceptImage"></div>
     </div>
 
-    <div class="section" id="sectionCourse">
-      <h3>COURSE</h3>
-      <h4 id="pCourseTitle"></h4>
-      <p id="pCourseText"></p>
+    <div class="story-section">
+      <div class="story-grid">
+        <div class="story-text">
+          <div class="en">concept</div>
+          <h3 id="pConceptTitle2"></h3>
+          <p id="pConceptText2"></p>
+        </div>
+        <div class="photo-frame" id="pConceptImage"></div>
+      </div>
     </div>
 
-    <div class="section" id="sectionMenu">
-      <h3>MENU</h3>
-      <p id="pMenuText"></p>
+    <div class="story-section" id="sectionCourse">
+      <div class="story-grid reverse">
+        <div class="photo-frame" id="pCourseImage"></div>
+        <div class="story-text">
+          <div class="en">course</div>
+          <h3 id="pCourseTitle"></h3>
+          <p id="pCourseText"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-section" id="sectionMenu">
+      <div class="section-title">
+        <div class="en">menu</div>
+        <h3>MENU</h3>
+        <p id="pMenuText"></p>
+      </div>
       <div class="menu-grid" id="pMenuCards"></div>
     </div>
 
-    <div class="section" id="sectionLunch">
-      <h3>LUNCH & CAFE</h3>
-      <p id="pLunchText"></p>
+    <div class="wine-section" id="sectionLunch">
+      <div class="story-text">
+        <div class="en">lunch</div>
+        <h3>LUNCH</h3>
+        <p id="pLunchText"></p>
+      </div>
     </div>
 
-    <div class="section" id="sectionDrink">
-      <h3>DRINK</h3>
-      <p id="pDrinkText"></p>
+    <div class="wine-section" id="sectionDrink">
+      <div class="story-grid">
+        <div class="story-text">
+          <div class="en">wine</div>
+          <h3>WINE / DRINK</h3>
+          <p id="pDrinkText"></p>
+        </div>
+        <div class="photo-frame" id="pDrinkImage"></div>
+      </div>
     </div>
 
-    <div class="section" id="sectionSpace">
-      <h3>SPACE</h3>
-      <p id="pSpaceText"></p>
-      <div class="image" id="pSpaceImage"></div>
+    <div class="floor-section" id="sectionSpace">
+      <div class="story-grid reverse">
+        <div class="photo-frame" id="pSpaceImage"></div>
+        <div class="story-text">
+          <div class="en">floor</div>
+          <h3>FLOOR</h3>
+          <p id="pSpaceText"></p>
+        </div>
+      </div>
     </div>
 
-    <div class="section" id="sectionNews">
+    <div class="news-section" id="sectionNews">
       <h3>NEWS</h3>
       <p id="pNewsText"></p>
     </div>
 
-    <div class="section">
-      <h3>INFORMATION</h3>
-      <div class="info-table">
-        <p><strong>住所：</strong><span id="pAddress"></span></p>
-        <p><strong>電話番号：</strong><span id="pTel"></span></p>
-        <p><strong>営業時間：</strong><span id="pHours"></span></p>
-        <p><strong>定休日：</strong><span id="pHoliday"></span></p>
-        <p><strong>アクセス：</strong><span id="pAccess"></span></p>
-        <p><strong>予約URL：</strong><span id="pReserveUrl"></span></p>
+    <div class="info-section">
+      <div class="info-wrap">
+        <div>
+          <div class="info-logo" id="pInfoLogo">SHOP NAME</div>
+          <a class="reserve-btn" id="pReserveBtn" href="#" target="_blank">WEB予約はこちら</a>
+        </div>
+
+        <div class="info-table">
+          <p><strong>住所</strong><span id="pAddress"></span></p>
+          <p><strong>電話番号</strong><span id="pTel"></span></p>
+          <p><strong>営業時間</strong><span id="pHours"></span></p>
+          <p><strong>定休日</strong><span id="pHoliday"></span></p>
+          <p><strong>アクセス</strong><span id="pAccess"></span></p>
+          <p><strong>予約URL</strong><span id="pReserveUrl"></span></p>
+        </div>
       </div>
     </div>
   </div>
@@ -549,21 +670,10 @@ function showBlock(id, isShow){
 function applyTheme(){
   const template = document.getElementById("template").value;
   const preview = document.getElementById("preview");
-  const body = document.body;
-
-  const themes = [
-    "theme-italian",
-    "theme-izakaya",
-    "theme-cafe",
-    "theme-bar",
-    "theme-washoku"
-  ];
+  const themes = ["theme-italian","theme-izakaya","theme-cafe","theme-bar","theme-washoku"];
 
   preview.classList.remove(...themes);
-  body.classList.remove(...themes);
-
   preview.classList.add("theme-" + template);
-  body.classList.add("theme-" + template);
 }
 
 function setFileBg(inputId, previewId){
@@ -574,7 +684,7 @@ function setFileBg(inputId, previewId){
     const reader = new FileReader();
     reader.onload = function(e){
       preview.style.backgroundImage =
-        `linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),url(${e.target.result})`;
+        `linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.28)),url(${e.target.result})`;
     };
     reader.readAsDataURL(file);
   }else{
@@ -600,11 +710,11 @@ function addMenuItem(){
   wrapper.innerHTML = `
     <h3>メニュー ${menuCount}</h3>
     <label>料理名</label>
-    <input class="menuName" placeholder="例：マルゲリータ">
+    <input class="menuName" placeholder="例：メイン料理">
     <label>説明</label>
-    <textarea class="menuDesc" placeholder="例：香ばしく焼き上げた人気メニュー"></textarea>
+    <textarea class="menuDesc" placeholder="例：素材の味を活かした一皿"></textarea>
     <label>価格</label>
-    <input class="menuPrice" placeholder="例：¥1,480">
+    <input class="menuPrice" placeholder="例：¥2,400">
     <label>画像</label>
     <input type="file" class="menuImage" accept="image/*">
   `;
@@ -660,16 +770,25 @@ function createMenuCards(){
 function createPreview(){
   applyTheme();
 
-  setText("pShopName", val("shopName","店舗名"));
+  const shopName = val("shopName","店舗名");
+  const conceptTitle = val("conceptTitle","記憶に残る一皿とは");
+  const conceptText = val("conceptText","お店のこだわりや世界観が入ります。");
+
+  setText("pLogo", shopName);
+  setText("pInfoLogo", shopName);
+  setText("pShopName", shopName);
   setText("pCatchCopy", val("catchCopy","キャッチコピー"));
 
-  setText("pConceptTitle", val("conceptTitle","コンセプト見出し"));
-  setText("pConceptText", val("conceptText","コンセプト本文が入ります。"));
-  setText("pCourseTitle", val("courseTitle","COURSE"));
+  setText("pConceptTitle", conceptTitle);
+  setText("pConceptText", conceptText);
+  setText("pConceptTitle2", conceptTitle);
+  setText("pConceptText2", conceptText);
+
+  setText("pCourseTitle", val("courseTitle","素材を活かしたコース"));
   setText("pCourseText", val("courseText","コース説明が入ります。"));
   setText("pMenuText", val("menuText","メニュー説明が入ります。"));
-  setText("pLunchText", val("lunchText","ランチ・カフェ説明が入ります。"));
-  setText("pDrinkText", val("drinkText","ドリンク説明が入ります。"));
+  setText("pLunchText", val("lunchText","ランチ説明が入ります。"));
+  setText("pDrinkText", val("drinkText","ワイン・ドリンク説明が入ります。"));
   setText("pSpaceText", val("spaceText","空間・席の説明が入ります。"));
   setText("pNewsText", val("newsText","ニュース情報が入ります。"));
 
@@ -680,9 +799,14 @@ function createPreview(){
   setText("pAccess", val("access","未入力"));
   setText("pReserveUrl", val("reserveUrl","未入力"));
 
+  const reserve = val("reserveUrl","#");
+  document.getElementById("pReserveBtn").href = reserve;
+
   setFileBg("heroImage", "pHero");
   setFileBg("conceptImage", "pConceptImage");
+  setFileBg("conceptImage", "pCourseImage");
   setFileBg("spaceImage", "pSpaceImage");
+  setFileBg("spaceImage", "pDrinkImage");
 
   createMenuCards();
 
@@ -694,23 +818,20 @@ function createPreview(){
   showBlock("sectionSpace", checked("showSpace"));
   showBlock("sectionNews", checked("showNews"));
 
-  const navItems = ["TOP"];
-  if(checked("showConcept")) navItems.push("CONCEPT");
-  if(checked("showCourse")) navItems.push("COURSE");
-  if(checked("showMenu")) navItems.push("MENU");
-  if(checked("showLunch")) navItems.push("LUNCH & CAFE");
-  if(checked("showDrink")) navItems.push("DRINK");
-  if(checked("showSpace")) navItems.push("SPACE");
-  if(checked("showNews")) navItems.push("NEWS");
-  navItems.push("ACCESS");
+  const navItems = ["home"];
+  if(checked("showMenu")) navItems.push("menu");
+  if(checked("showDrink")) navItems.push("wine");
+  if(checked("showSpace")) navItems.push("floor");
+  navItems.push("info");
+  if(checked("showNews")) navItems.push("news");
+  navItems.push("map");
 
-  document.getElementById("pNav").textContent = navItems.join(" / ");
+  document.getElementById("pNav").textContent = navItems.join("　/　");
   document.getElementById("preview").style.display = "block";
 }
 
 toggleInputs();
 applyTheme();
 </script>
-
 </body>
 </html>
